@@ -18,7 +18,7 @@ async function generateContent(prompt){
 }
 
 app.post("/generate", async(req, res) =>{
-    const prompt = `What are the medical departments for the medicine: ${req.body.prompt}? Please respond with only the department name.`;
+    const prompt = `What are the medical departments for the medicine: ${req.body.prompt}? Please respond with only the departments name.`;
     const content = await generateContent(prompt);
 
     let department = content
