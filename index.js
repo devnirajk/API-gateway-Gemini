@@ -18,9 +18,17 @@ async function generateContent(prompt){
 }
 
 app.post("/generate", async(req, res) =>{
-    const content = await generateContent(req.body.prompt);
+    const prompt = `What are the medical departments for the medicine: ${req.body.prompt}? Please respond with only the department name.`;
+    const content = await generateContent(prompt);
+
+    let department = content
+                        .replace(/\n/g, ' ')         // Replace newlines with spaces
+                        .replace(/\*/g, '')          // Remove asterisks (*)
+                        .replace(/\*\*/g, '')        // Remove double asterisks (**) for bold
+                        .trim();                     // Trim any extra spaces at the beginning and end
+
     return res.json({
-        message: content,
+        message: department,
         status: 200
     });
 });
